@@ -1,0 +1,27 @@
+
+GET http://127.0.0.1:3000/producto
+
+
+
+### guardar
+POST http://127.0.0.1:3000/producto
+Content-Type: application/json
+
+{
+    "nombre": "monescritorii",
+    "estado": false
+}
+
+
+### mostrar
+GET http://127.0.0.1:3000/producto/1
+
+
+### modificar
+
+PUT http://127.0.0.1:3000/producto/34
+
+### eliminar
+
+DELETE http://127.0.0.1:3000/producto/34
+
