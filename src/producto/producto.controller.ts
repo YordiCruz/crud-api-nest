@@ -1,5 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { ProductoService } from './producto.service';
+import { CreateProductoDto } from './dto/create-producto.dto';
+import { UpdateProductoDto } from './dto/update-producto.dto';
 //ruta base
 @Controller('producto')
 export class ProductoController {
@@ -19,7 +21,8 @@ export class ProductoController {
     }
 
     @Post()
-    crear(@Body() datos: any) {
+    crear(@Body() datos: CreateProductoDto) {
+        
         return this.produService.guardar(datos);
     }
 
@@ -29,15 +32,15 @@ export class ProductoController {
         return this.produService.mostrar(id);
     }
 
-    @Put(':id')
-    actualizar(){
-        return this.produService.modificar(4);
+    @Patch(':id')
+    actualizar(@Param('id') id: number, @Body() datos: UpdateProductoDto) {
+        return this.produService.modificar(id, datos);
     }
 
 
     @Delete(':id')    
-    eliminar(){
-        return this.produService.eliminar(4);
+    eliminar(@Param('id') id: number){
+        return this.produService.eliminar(id);
     }
 
 

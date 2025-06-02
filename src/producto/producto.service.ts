@@ -1,5 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Producto } from './producto.entity';
+import { UpdateCategoriaDto } from 'src/categoria/dto/update-categoria.dto';
+import { CreateProductoDto } from './dto/create-producto.dto';
+import { UpdateProductoDto } from './dto/update-producto.dto';
 
 @Injectable()
 export class ProductoService {
@@ -17,7 +20,7 @@ export class ProductoService {
 }
 
 
-  guardar(datos: any): Producto {
+  guardar(datos: CreateProductoDto): Producto {
     
     const nuevoproducto: Producto ={
         id: this.id++,
@@ -42,13 +45,21 @@ export class ProductoService {
   }
 
   
-  modificar(id: number):string{
-    return "esto es modificar producto desde productoservice "+id;
+  modificar(id: number, datos: UpdateProductoDto):Producto{
+    const producto = this.mostrar(id);
+    //como no estamos con  base de datos se utilizara lo siguiente
+    Object.assign(producto, datos);
+    return producto;
   }
 
   
-  eliminar(id: number):string{
-    return "esto es eliminar producto desde productoservice "+id;
+  eliminar(id: number): void{
+    const index = this.productos.findIndex(pro => pro.id == id);
+    if (index === -1) {
+      throw new NotFoundException("producto no encontrado");
+    }
+    //splice es para eliminar segun el index que le pasamos y el numero de elementos que queremos eliminar
+    this.productos.splice(index, 1);
   }
 
 

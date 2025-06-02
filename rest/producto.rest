@@ -9,19 +9,25 @@ Content-Type: application/json
 
 {
     "nombre": "monescritorii",
-    "estado": false
+    "estado": false,
+    "precio": 500
 }
 
 
 ### mostrar
-GET http://127.0.0.1:3000/producto/1
+GET http://127.0.0.1:3000/producto/3
 
 
 ### modificar
 
-PUT http://127.0.0.1:3000/producto/34
+PATCH http://127.0.0.1:3000/producto/2
+Content-Type: application/json
+
+{
+    "nombre": "prueba"
+}
 
 ### eliminar
 
-DELETE http://127.0.0.1:3000/producto/34
+DELETE http://127.0.0.1:3000/producto/1
 
